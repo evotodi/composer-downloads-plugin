@@ -31,6 +31,27 @@ Suppose you publish a PHP package `foo/bar` which relies on an external artifact
 
 When a downstream user of `foo/bar` runs `composer install`, it will fetch and extract the zip file, creating `vendor/foo/bar/extern/examplelib`. 
 
+Suppose your download url for an archive does not include a file extension. Add the ```type``` and ```ext``` to the package section.
+```json
+{
+  "name": "foo/bar",
+  "require": {
+    "civicrm/composer-downloads-plugin": "~2.1"
+  },
+  "extra": {
+    "downloads": {
+      "examplelib": {
+        "url": "https://example.com/examplelib-0.1?type=zip",
+        "type": "archive",
+        "ext": "zip",  
+        "path": "extern/examplelib",
+        "ignore": ["test", "doc", ".*"]
+      }
+    }
+  }
+}
+```
+
 ## Evaluation
 
 The primary strengths of `composer-downloads-plugin` are:
@@ -60,7 +81,9 @@ The `extra.downloads` section contains a list of files to download. Each extra-f
     * `archive`: The `url` references a zip or tarball which should be extracted at the given `path`. (Default for URLs involving `*.zip`, `*.tar.gz`, or `*.tgz`.)
     * `file`: The `url` should be downloaded to the given `path`. (Default for all other URLs.)
     * `phar`: The `url` references a PHP executable which should be installed at the given `path`.
-
+    
+* `ext`: (*Optional*) Specifies the file extension for `type: archive`
+  
 * `ignore`: (*Optional*) A list of a files that should be omited from the extracted folder. (This supports a subset of `.gitignore` notation.)
 
 * `version`: (*Optional*) A version number for the downloaded artifact. This has no functional impact on the lifecycle of the artifact, but
