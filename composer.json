@@ -1,5 +1,5 @@
 {
-    "name": "civicrm/composer-downloads-plugin",
+    "name": "evotodi/composer-downloads-plugin",
     "description": "Composer plugin for downloading additional files within any composer package.",
     "type": "composer-plugin",
     "license": "MIT",
@@ -11,6 +11,10 @@
         {
             "name": "Tim Otten",
             "email": "totten@civicrm.org"
+        },
+        {
+            "name": "Evotodi",
+            "email": "evotodi@gmail.com"
         }
     ],
     "require": {
