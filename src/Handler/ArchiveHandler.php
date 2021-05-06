@@ -18,6 +18,12 @@ class ArchiveHandler extends BaseHandler
 
     protected function parseDistType($url)
     {
+        if(isset($this->extraFile['ext']) && isset($this->extraFile['type'])) {
+            if($this->extraFile['type'] === "archive"){
+                return $this->extraFile['ext'];
+            }
+        }
+
         $parts = parse_url($url);
         $filename = pathinfo($parts['path'], PATHINFO_BASENAME);
         if (preg_match('/\.zip$/', $filename)) {
